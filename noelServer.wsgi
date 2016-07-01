@@ -1,1 +1,0 @@
-from appServer import app as application
