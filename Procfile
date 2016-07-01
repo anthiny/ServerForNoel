@@ -1,1 +1,1 @@
-web: gunicorn noelServer.wsgi
+web: gunicorn appServer:app --log-file -
