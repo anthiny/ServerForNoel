@@ -1,10 +1,13 @@
+import os
 from flask import Flask, redirect, url_for, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/Anthony/Downloads/person.db'
-app.debug = True
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URL"]
+if app.config['SQLALCHEMY_DATABASE_URI'] is None:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/Anthony/Downloads/person.db'
+    app.debug = True
 db = SQLAlchemy(app)
 
 class Person(db.Model):
