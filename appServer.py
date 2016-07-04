@@ -29,9 +29,9 @@ class Info(db.Model):
     index = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, ForeignKey('persons.id'))
     name = db.Column(db.String(50), unique=False)
-    phone = db.Column(db.String(11), unique=True)
+    phone = db.Column(db.String(11), unique=False)
     companyName = db.Column(db.String(100), unique=False)
-    email = db.Column(db.String(50), unique=True)
+    email = db.Column(db.String(50), unique=False)
 
     def __init__(self, user_id, name, phone, companyName, email):
         self.user_id = user_id
@@ -50,6 +50,9 @@ class Info(db.Model):
 
 def makeDB():
     db.create_all()
+
+def dropDB():
+    db.drop_all()
 
 @app.route('/person/<user_id>/info/<info_phone>', methods = ['POST', 'DELETE'])
 def addInfo(user_id, info_phone):
